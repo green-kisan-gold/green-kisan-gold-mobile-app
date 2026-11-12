@@ -1,0 +1,11 @@
+{
+  "name": "GREEN KISAN GOLD",
+  "short_name": "GREEN GOLD",
+  "description": "Official GREEN KISAN GOLD Agricultural App",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#063b25",
+  "theme_color": "#063b25",
+  "orientation": "portrait"
+}
