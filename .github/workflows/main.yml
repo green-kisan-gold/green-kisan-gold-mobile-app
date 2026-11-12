@@ -1,5 +1,5 @@
 
-name: Build GREEN KISAN GOLD APK
+name: Build GREEN KISAN GOLD RELEASE APK
 
 on:
   workflow_dispatch:
@@ -75,6 +75,13 @@ jobs:
                   versionCode 1
                   versionName '1.0'
               }
+
+              buildTypes {
+                  release {
+                      signingConfig signingConfigs.debug
+                      minifyEnabled false
+                  }
+              }
           }
           EOF
 
@@ -140,7 +147,6 @@ jobs:
           import android.webkit.WebViewClient;
           import android.webkit.WebSettings;
           import android.webkit.WebChromeClient;
-          import android.view.View;
           import android.widget.ProgressBar;
           import android.widget.LinearLayout;
           import android.graphics.Color;
@@ -193,11 +199,15 @@ jobs:
           }
           EOF
 
-      - name: Build APK
-        run: gradle assembleDebug
+      - name: Build Release APK
+        run: gradle assembleRelease
+
+      - name: Rename APK
+        run: |
+          cp app/build/outputs/apk/release/app-release.apk GREEN-KISAN-GOLD.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: GREEN-KISAN-GOLD-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: GREEN-KISAN-GOLD-RELEASE
+          path: GREEN-KISAN-GOLD.apk
